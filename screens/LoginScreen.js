@@ -13,7 +13,7 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <Image source={require('../assets/logo.png')} style={styles.logo} />
+      {/* <Image source={require('../assets/logo.png')} style={styles.logo} /> */}
       <Text style={styles.text}>Social App</Text>
 
       <FormInput
@@ -56,7 +56,9 @@ const LoginScreen = ({navigation}) => {
         btnType="google"
         color="#de4d41"
         backgroundColor="#f5e7ea"
-        onPress={() => googleLogin()}
+        onPress={() =>
+          googleLogin().then(() => console.log('Signed in with Google!'))
+        }
       />
 
       <TouchableOpacity

@@ -41,8 +41,13 @@ export const AuthProvider = ({children}) => {
           // Create a Google credential with the token
           const googleCredential = auth.GoogleAuthProvider.credential(idToken);
 
+          try {
+            auth().signInWithCredential(googleCredential);
+          } catch (e) {
+            console.log(e);
+          }
           // Sign-in the user with the credential
-          return auth().signInWithCredential(googleCredential);
+          // return auth().signInWithCredential(googleCredential);
         },
       }}>
       {children}
