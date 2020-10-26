@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, {useContext} from 'react';
+import {View, Text, StyleSheet} from 'react-native';
 
-const HomeScreen = () => {
+const AddPostScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome</Text>
+      <Text style={styles.text}>Add post screen</Text>
     </View>
   );
-}
+};
 
-export default HomeScreen;
+export default AddPostScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -21,6 +21,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 20,
-    color: '#333333'
-  }
+    color: '#333333',
+  },
 });
