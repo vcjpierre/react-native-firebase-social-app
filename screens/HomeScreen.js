@@ -6,7 +6,6 @@ import { Container } from '../styles/FeedStyles'
 const HomeScreen = () => {
   return (
     <Container>
-      <Text style={styles.text}>Welcome</Text>
     </Container>
   );
 }
