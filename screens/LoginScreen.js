@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   Image,
   Platform,
+  ScrollView,
   StyleSheet,
 } from 'react-native';
 import FormInput from '../components/FormInput';
@@ -19,7 +20,8 @@ const LoginScreen = ({navigation}) => {
   const {login, googleLogin, fbLogin} = useContext(AuthContext);
 
   return (
-    <View style={styles.container}>      
+    <ScrollView contentContainerStyle={styles.container}>
+      <Image source={require('../assets/logo.png')} style={styles.logo} />
       <Text style={styles.text}>Social App</Text>
 
       <FormInput
@@ -76,7 +78,7 @@ const LoginScreen = ({navigation}) => {
           Don't have an acount? Create here
         </Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
@@ -84,11 +86,10 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f9fafd',
-    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     padding: 20,
+    paddingTop: 50,
   },
   logo: {
     height: 150,
