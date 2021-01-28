@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {
@@ -17,12 +17,14 @@ import {
   Divider,
 } from '../styles/FeedStyles';
 
+import ProgressiveImage from './ProgressiveImage';
+
 import { AuthContext } from '../navigation/AuthProvider';
 
 import moment from 'moment';
 
-const PostCard = ({item, onDelete}) => {
-  const {user, logout} = useContext(AuthContext);
+const PostCard = ({ item, onDelete }) => {
+  const { user, logout } = useContext(AuthContext);
 
   likeIcon = item.liked ? 'heart' : 'heart-outline';
   likeIconColor = item.liked ? '#2e64e5' : '#333';
@@ -46,14 +48,22 @@ const PostCard = ({item, onDelete}) => {
   return (
     <Card key={item.id}>
       <UserInfo>
-        <UserImg source={{uri: item.userImg}} />
+        <UserImg source={{ uri: item.userImg }} />
         <UserInfoText>
           <UserName>{item.userName}</UserName>
           <PostTime>{moment(item.postTime.toDate()).fromNow()}</PostTime>
         </UserInfoText>
       </UserInfo>
       <PostText>{item.post}</PostText>
-      {item.postImg != null ? <PostImg source={{uri: item.postImg}} /> : <Divider />}
+      {/* {item.postImg != null ? <PostImg source={{uri: item.postImg}} /> : <Divider />} */}
+      {item.postImg != null ? (
+        <ProgressiveImage
+          defaultImageSource={require('../assets/default-img.png')}
+          source={{ uri: item.postImg }}
+          style={{ width: '100%', height: 250 }}
+          resizeMode='cover'
+        />
+      ) : <Divider />}
 
       <InteractionWrapper>
         <Interaction active={item.liked}>
@@ -65,10 +75,10 @@ const PostCard = ({item, onDelete}) => {
           <InteractionText>{commentText}</InteractionText>
         </Interaction>
         {user.uid == item.userId ?
-        <Interaction onPress={() => onDelete(item.id)}>
-          <Ionicons name="md-trash-bin" size={25} />
-        </Interaction>
-        : null}
+          <Interaction onPress={() => onDelete(item.id)}>
+            <Ionicons name="md-trash-bin" size={25} />
+          </Interaction>
+          : null}
       </InteractionWrapper>
     </Card>
   );
