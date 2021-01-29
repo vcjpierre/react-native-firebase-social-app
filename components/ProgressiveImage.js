@@ -23,7 +23,7 @@ class ProgressiveImage extends Component {
   render() {
     const { defaultImageSource, source, style, ...props } = this.props;
     return (
-      <View style={styles - container}>
+      <View style={styles.container}>
         <Animated.Image
           {...props}
           source={defaultImageSource}
@@ -35,7 +35,7 @@ class ProgressiveImage extends Component {
           {...props}
           source={source}
           style={[style, { opacity: this.imageAnimated }, styles.imageOverlay]}
-          onLoad={this.handleDefaultImageLoad}
+          onLoad={this.handleImageLoad}
         />
       </View>
     );
