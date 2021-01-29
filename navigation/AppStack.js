@@ -8,6 +8,7 @@ import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 import HomeScreen from '../screens/HomeScreen';
 import ChatScreen from '../screens/ChatScreen';
+import MessagesScreen from '../screens/MessagesScreen'
 import ProfileScreen from '../screens/ProfileScreen';
 import AddPostScreen from '../screens/AddPostScreen';
 
@@ -65,7 +66,32 @@ const FeedStack = ({navigation}) => (
   </Stack.Navigator>
 );
 
+const MessageStack = ({navigation}) => (
+  <Stack.Navigator>
+    <Stack.Screen name="Messages" component={MessagesScreen} />
+    <Stack.Screen 
+      name="Chat" 
+      component={ChatScreen}
+      options={({route}) => ({
+        title: route.params.userName,
+        headerBackTitleVisible: false
+      })}
+    />
+  </Stack.Navigator>
+);
+
 const AppStack = () => {
+  const getTabBarVisibility = (route) => {
+    const routeName = route.state 
+    ? route.state.routes[route.state.index].name 
+    : ''
+
+    if (routeName === 'Chat') {
+      return false;
+    }
+    return true;
+  }
+  
   return (
     <Tab.Navigator
       tabBarOptions={{
@@ -74,8 +100,10 @@ const AppStack = () => {
       <Tab.Screen
         name="Home"
         component={FeedStack}
-        options={{
+        options={({route}) => ({
           tabBarLabel: 'Home',
+          // tabBarVisible: getTabBarVisibility(route),
+          tabBarVisible: route.state && route.state.index === 0,
           tabBarIcon: ({color, size}) => (
             <MaterialCommunityIcons
               name="home-outline"
@@ -83,12 +111,14 @@ const AppStack = () => {
               size={size}
             />
           ),
-        }}
+        })}
       />
       <Tab.Screen
         name="Messages"
-        component={ChatScreen}
-        options={{
+        component={MessageStack}
+        options={({route}) => ({
+          // tabBarVisible: getTabBarVisibility(route),
+          tabBarVisible: route.state && route.state.index === 0,
           // tabBarLabel: 'Home',
           tabBarIcon: ({color, size}) => (
             <Ionicons
@@ -97,7 +127,7 @@ const AppStack = () => {
               size={size}
             />
           ),
-        }}
+        })}
       />
       <Tab.Screen
         name="Profile"
