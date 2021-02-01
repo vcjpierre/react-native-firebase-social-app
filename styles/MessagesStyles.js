@@ -40,7 +40,7 @@ export const TextSection = styled.View`
 `;
 
 export const UserInfoText = styled.View`
-  flex-direction: column;
+  flex-direction: row;
   justify-content: space-between;
   margin-bottom: 5px;
 `;
@@ -54,7 +54,7 @@ export const UserName = styled.Text`
 export const PostTime = styled.Text`
   font-size: 12px;
   color: #666;
-  font-family: 'Lato-Regular';  
+  font-family: 'Lato-Regular';
 `;
 
 export const MessageText = styled.Text`
